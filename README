@@ -1,6 +1,6 @@
 # Terminus
 
-This is a perl-based, bacteriophage (phage) terminus predicting tool by using Next Generation Sequencing data.
+This is a perl-based, bacteriophage (phage) terminus predicting tool by using raw sequencing read data.
 The genomic position of terminus sequence is estimated based on method 'neighboring coverage ratio' and 
 'read edge frequency'. Please refer to 'Predicting genome terminus sequences of Bacillus cereus-group 
 Bacteriophage using Next Generation Sequencing data' for more detail in algorithm (manucsript in preparation).
@@ -19,25 +19,30 @@ DEPENDENCIES:
   Note: to easily check whether your OS has the tools installed, use the command:
   $ which perl (or bowtie2, or samtools)
 
-Getting ready:
 
-Fastq file(s) and a fasta file that contains assembled phage genome sequence.
-High throughput sequencing only output raw read files with fastq format. The assembly sequence needs to be generated
-using assembler. Newbler is recommended for Ion Torrent PGM and Roche 454 sequencer. Velvet is suitable for Illumina.
+GETTING READY:
+Fastq file(s) and a fasta file that contains assembled phage genome sequence are necessary for this analysis.
+High throughput sequencing only output raw read files in fastq format. The assembled sequence needs to be generated
+using assembler. 
+Newbler is recommended for Ion Torrent PGM and Roche 454 sequencer (http://www.454.com/products/analysis-software/). 
+Velvet is suitable for Illumina (https://www.ebi.ac.uk/~zerbino/velvet/).
 
-Download and setup:
+
+DOWNLOAD & SETUP:
 After the input files are generated and dependencies are installed, please download the terminus package from
 github repository on https://github.com/james0032/Terminus
 The package can be downloaded from github page or cloned by using command:
 $ git clone --recursive https://github.com/james0032/Terminus
 
-There is no installation step for terminus package. To make sure the shell script is executale, use command:
+THERE IS NO installation step for terminus package. To make sure the shell script is executale, use command:
 $ chmod +x terminus.SE.sh
 
-Runnung terminus:
+
+RUNNING terminus:
 Phage terminus package runs single-end and pair-end read with terminus.SE.sh and terminus.PE.sh, respectively. 
 The program will use the prefix of *.fasta file as prefix of all output files. The output directory can be specified
 in the last parameter of command; otherwise, a 'result' directory will be created to save all the output files. 
+
 
 Example:
 Single-end I12.fastq and phage genome assembly I12.fasta saved in fasta file are provided for demonstration purpose. 
@@ -46,6 +51,7 @@ $ cd example
 
 After check the two example files exist in the folder, use command to run the analysis:
 $ ../terminus.SE.sh -w 100 I12.fasta I12.fastq I12_terminus
+
 
 Output files:
 The analysis will automatically generate a 'output' folder in the directory you specified. It contains three files:
@@ -62,11 +68,10 @@ The analysis will automatically generate a 'output' folder in the directory you 
   R_End: Last nucleotide coordinate of right window on the input fasta file. 
   NCR: Neighboring coverage ratio (R_Avg_Cov/ L_Avg_Cov)
 
-  Output *.sort.start.cov:
+  Output *.sort.start.cov fields:
   First column: Nucleotide coordinate on the input fasta file.
   Second column: 5' read edge frequency at given coordinate. 
   
-  Output *.sort.end.cov:
+  Output *.sort.end.cov fields:
   First column: Nucleotide coordinate on the input fasta file.
   Second column: 3' read edge frequency at given coordinate. 
-  

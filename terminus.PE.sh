@@ -4,11 +4,11 @@ set -ef -o pipefail
 
 usage() {
   cat >&2 << __EOF__
-Usage : $0 [options] <input.fasta> <input.fastq> <outdir>
+Usage : $0 [options] <input.fasta> <R1.fastq> <R2.fastq> <outdir>
 
 Terminus determination for single-end NGS reads 
 <intput.fasta> is the single contig of phage genome assemly
-<intput.fastq> is the single end NGS read data
+<R1.fastq> and <R2.fastq> are the pair-end raw sequencing read files
 <outdir> will be the name of directory created to the current folder
 
 Options:
@@ -40,12 +40,12 @@ while getopts 'hw:' opt; do
 done
 shift $((OPTIND -1))
 
-if [[ -z "$1" || -z "$2" ]]; then
+if [[ -z "$1" || -z "$2" || -z "$3" ]]; then
    usage
 fi
 
-OUTDIR=$3
-if [[ -z "$3" ]]; then
+OUTDIR=$4
+if [[ -z "$4" ]]; then
    OUTDIR="result"
 fi
 
@@ -59,7 +59,8 @@ echo "name=$NAME"
 CURDIR=$PWD
 echo "input dir = $CURDIR"
 ln -sf $CURDIR/$1 $CURDIR/$OUTDIR/$NAME.fasta
-ln -sf $CURDIR/$2 $CURDIR/$OUTDIR/$NAME.fastq
+ln -sf $CURDIR/$2 $CURDIR/$OUTDIR/$NAME.R1.fastq
+ln -sf $CURDIR/$3 $CURDIR/$OUTDIR/$NAME.R2.fastq
 
 INDIR=$(dirname "$0")
 srcPATH="$CURDIR/$INDIR/src"
@@ -71,7 +72,7 @@ cd $OUTDIR
 echo "walk into created folder"
 echo "`pwd`"
 bowtie2-build -f $NAME.fasta $NAME
-bowtie2 -x $NAME -U $NAME.fastq --local -S $NAME.local.sam -p 16
+bowtie2 -x $NAME -1 $NAME.R1.fastq -2 $NAME.R2.fastq --local -S $NAME.local.sam -p 16
 samtools faidx $NAME.fasta 
 samtools view -bt $NAME.fasta -o $NAME.bam $NAME.local.sam
 samtools sort $NAME.bam $NAME.sorted

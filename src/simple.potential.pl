@@ -21,6 +21,7 @@ my $fratio;
 $fratio=$line[6];
 my ($cpos, $cratio, $difpos);
 my @pline;
+my @lline;
 print OUT "L_Avg_Cov\tL_Start\tL_End\tR_Avg_Cov\tR_Start\tR_End\tNCR\n";
 while(<IN>){
 	$line=$_;
@@ -32,7 +33,7 @@ while(<IN>){
 	if(($cratio >1) && ($difpos == 1)){
 		if($cratio > $fratio){
 			@pline=@line;
-			print "going up $cratio $fratio $cpos $fpos\n";	
+			print "Peak approached $cratio $fratio $cpos $fpos\n";	
 		}
 		$fratio=$cratio;
 		$fpos=$cpos;
@@ -40,18 +41,33 @@ while(<IN>){
 	elsif(($cratio <1) && ($difpos ==1)){
 		if($cratio < $fratio){
 			@pline=@line;
-			print "going down $cratio $fratio $cpos $fpos\n";
+			print "Trough approached $cratio $fratio $cpos $fpos\n";
 		}
 		$fratio=$cratio;
 		$fpos=$cpos;
 	}
 	else{
-		foreach my $ele (@pline){
-		print OUT "$ele\t";
+		if(! @lline){
+			@lline=@pline;
+			foreach my $ele (@lline){
+				print OUT "$ele\t";
+			}
+			print OUT "\n";
+			$fpos=$cpos;
+			$fratio=$cratio;
+			#print " @lline first line output\n";
 		}
-		print OUT "\n";
-		$fpos=$cpos;
-		$fratio=$cratio;
+		#print "lline1 = $lline[1], pline1 = $pline[1]\n";
+		if($lline[1] ne $pline[1]){ 
+			@lline=@pline;
+			foreach my $ele (@lline){
+				print OUT "$ele\t";
+			}
+			print OUT "\n";
+		}
+			$fpos=$cpos;
+			$fratio=$cratio;
+		
 	}
 	
 }
@@ -59,3 +75,4 @@ foreach my $ele (@pline){
                 print OUT "$ele\t";
                 }
                 print OUT "\n";
+		#print "@pline \t @line\n";
