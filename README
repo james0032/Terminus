@@ -1,9 +1,9 @@
 # Terminus
 
-# This is a perl-based, bacteriophage (phage) terminus predicting tool by using Next Generation Sequencing data.
-# The genomic position of terminus sequence is estimated based on method 'neighboring coverage ratio' and 
-# 'read edge frequency'. Please refer to 'Predicting genome terminus sequences of Bacillus cereus-group 
-# Bacteriophage using Next Generation Sequencing data' for more detail in algorithm (manucsript in preparation).
+This is a perl-based, bacteriophage (phage) terminus predicting tool by using Next Generation Sequencing data.
+The genomic position of terminus sequence is estimated based on method 'neighboring coverage ratio' and 
+'read edge frequency'. Please refer to 'Predicting genome terminus sequences of Bacillus cereus-group 
+Bacteriophage using Next Generation Sequencing data' for more detail in algorithm (manucsript in preparation).
 
 DEPENDENCIES:
 1) perl -         The source code are written in perl script. The version used for development was perl v5.20.3. 
