@@ -35,7 +35,7 @@ The package can be downloaded from github page or cloned by using command:
 ```
 $ git clone --recursive https://github.com/james0032/Terminus`
 ```
-THERE IS NO installation step for terminus package. To make sure the shell script is executale, use command:
+THERE IS NO installation step for terminus package. To make sure the shell script is executable, use command:
 ```
 $ chmod +x terminus.SE.sh
 ```
