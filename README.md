@@ -64,18 +64,18 @@ The analysis will automatically generate a 'output' folder in the directory you 
 - sort.end.cov
 
   ### Output *.simple.potential.pos fields:
-  L_Avg_Cov: Average depth of left window (window size was specified in running command; otherwise, DEFAULT = 100)
-  L_Start: First nucleotide coordinate of left window on the input fasta file. 
-  L_End: Last nucleotide coordinate of left window on the input fasta file. 
-  R_Avg_Cov: Average depth of right window.
-  R_Start: First nucleotide coordinate of right window on the input fasta file.
-  R_End: Last nucleotide coordinate of right window on the input fasta file. 
-  NCR: Neighboring coverage ratio (R_Avg_Cov/ L_Avg_Cov)
+  - L_Avg_Cov: Average depth of left window (window size was specified in running command; otherwise, DEFAULT = 100)
+  - **L_Start**: First nucleotide coordinate of left window on the input fasta file. 
+  - **L_End**: Last nucleotide coordinate of left window on the input fasta file. 
+  - **R_Avg_Cov**: Average depth of right window.
+  - **R_Start**: First nucleotide coordinate of right window on the input fasta file.
+  - **R_End**: Last nucleotide coordinate of right window on the input fasta file. 
+  - **NCR**: Neighboring coverage ratio (R_Avg_Cov/ L_Avg_Cov)
 
   ### Output *.sort.start.cov fields:
-  First column: Nucleotide coordinate on the input fasta file.
-  Second column: 5' read edge frequency at given coordinate. 
+  - **First column**: Nucleotide coordinate on the input fasta file.
+  - **Second column**: 5' read edge frequency at given coordinate. 
   
   ### Output *.sort.end.cov fields:
-  First column: Nucleotide coordinate on the input fasta file.
-  Second column: 3' read edge frequency at given coordinate. 
+  - **First column**: Nucleotide coordinate on the input fasta file.
+  - **Second column**: 3' read edge frequency at given coordinate. 
