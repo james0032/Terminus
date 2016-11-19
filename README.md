@@ -47,15 +47,58 @@ in the last parameter of command; otherwise, a 'result' directory will be create
 
 
 ## Example:
-Single-end I12.fastq and phage genome assembly I12.fasta saved in fasta file are provided for demonstration purpose. 
+Single-end I13.fastq and phage genome assembly I13.fasta saved in fasta file are provided for demonstration purpose. 
 To run the example, go to the example directory in terminus package:
 ```
 $ cd example
 ```
 After check the two example files exist in the folder, use command to run the analysis:
 ```
-$ ../terminus.SE.sh -w 100 I12.fasta I12.fastq I12_terminus
+$ ../terminus.SE.sh -w 100 I13.fasta I13.fastq I13_terminus
 ```
+ ### Result interpretation:
+ I13.simple.potential.pos shows three nucleotide positions of significant NCRs. 
+```
+L_Avg_Cov       L_Start L_End   R_Avg_Cov       R_Start R_End   NCR
+425.320 82031   82130   223.860 82131   82230   0.526   
+**400.110 111500  111599  814.750 111600  111699  2.036**
+**840.610 114260  114359  352.680 114360  114459  0.420**
+```
+
+ One region that has NCR higher than criteria (NCR>=1.8) followed by a region with significantly lower NCR (NCR <=0.556) forms the high coverage region that is potentially the repeat region of a phage genome. 
+ The adjacent nucleotide position is the potential start of one genome terminus (position 111600 with NCR=2.036) while adjacent nucleotide position on the next row is the potential end of another genome terminus (position 114359 with NCR=0.420). 
+
+ I13.sort.start.cov shows nucleotide positions with top 10 Read Edge Frequencies from 5' end of raw reads (5'REF). 
+```
+**111610  110**
+107673  71
+111537  63
+111411  61
+49849   49
+111608  44
+154643  43
+113983  40
+111595  37
+106924  37
+```
+ Position 111610 has the highest 5'REF, which locates within the window 111600-111699 with highest NCR=2.036. The terminus selection is set to be determined by position of read edge frequency if it locates within the window. 
+
+ I13.sort.end.cov shows nucleotide positions with top 10 Read Edge Frequencies from 3' end of raw reads (3'REF). 
+```
+**114359  274**
+114358  93
+41587   73
+126350  37
+50720   36
+126679  32
+13414   30
+114356  30
+114355  30
+63176   27
+```
+ Position 114359 has the highest 3'REF, where is right on the edge of window 114360-114359 with lowest NCR=0.420. 
+
+ This data suggests that the termini of I13 are not the end of assembled sequence on I13.fasta; instead, it has potential termini on position 111610 and 114359, which forms a linear phage genome with direct terminal repeat with size 114359-111610+1=2750 bp. 
 
 ## Output files:
 The analysis will automatically generate a 'output' folder in the directory you specified. It contains three files:
@@ -74,8 +117,8 @@ The analysis will automatically generate a 'output' folder in the directory you 
 
   ### Output *.sort.start.cov fields:
   - **First column**: Nucleotide coordinate on the input fasta file.
-  - **Second column**: 5' read edge frequency at given coordinate. 
+  - **Second column**: 5' Read Edge Frequency (5'REF) at given coordinate. 
   
   ### Output *.sort.end.cov fields:
   - **First column**: Nucleotide coordinate on the input fasta file.
-  - **Second column**: 3' read edge frequency at given coordinate. 
+  - **Second column**: 3' Read Edge Frequency (3'REF) at given coordinate. 
