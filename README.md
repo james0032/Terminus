@@ -1,4 +1,4 @@
-## Terminus
+# Terminus
 
 This is a perl-based, bacteriophage (phage) terminus predicting tool by using raw sequencing read data.
 The genomic position of terminus sequence is estimated based on method 'neighboring coverage ratio' and 
