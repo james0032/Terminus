@@ -56,7 +56,7 @@ After check the two example files exist in the folder, use command to run the an
 ```
 $ ../terminus.SE.sh -w 100 I13.fasta I13.fastq I13_terminus
 ```
- ### Result interpretation:
+### Result interpretation:
  I13.simple.potential.pos shows three nucleotide positions of significant NCRs. 
 ```
 L_Avg_Cov       L_Start L_End   R_Avg_Cov       R_Start R_End   NCR
