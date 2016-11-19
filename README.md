@@ -64,7 +64,7 @@ The analysis will automatically generate a 'output' folder in the directory you 
 - sort.end.cov
 
   ### Output *.simple.potential.pos fields:
-  - L_Avg_Cov: Average depth of left window (window size was specified in running command; otherwise, DEFAULT = 100)
+  - **L_Avg_Cov**: Average depth of left window (window size was specified in running command; otherwise, DEFAULT = 100)
   - **L_Start**: First nucleotide coordinate of left window on the input fasta file. 
   - **L_End**: Last nucleotide coordinate of left window on the input fasta file. 
   - **R_Avg_Cov**: Average depth of right window.
