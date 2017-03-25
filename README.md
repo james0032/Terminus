@@ -122,3 +122,6 @@ The analysis will automatically generate a 'output' folder in the directory you 
   ### Output *.sort.end.cov fields:
   - **First column**: Nucleotide coordinate on the input fasta file.
   - **Second column**: 3' Read Edge Frequency (3'REF) at given coordinate. 
+  
+### Appendix
+A sequence selection bias was revealed from the transposome-based library prep kit, _Nextera_, in _Illumina_ sequencing during the development of the method. The bias misrepresents the read edge frequency, which may give rise to negative result in Terminus. The analytical result described the finding is going to be published with the manuscript under preparation. 
